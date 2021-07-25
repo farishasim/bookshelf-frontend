@@ -11,7 +11,7 @@ function addBook() {
     const year = document.getElementById("inputBookYear").value;
     const completed = document.getElementById("inputBookIsComplete").checked;
 
-    const newbook = createBook(title, author, year, false);
+    const newbook = createBook(title, author, year, completed);
     logging(title, author, year, completed)
 
     let bookshelfList;
@@ -35,14 +35,26 @@ function createBook(title, author, year, isCompleted) {
     const yearElement = document.createElement("p");
     yearElement.innerText = year;
 
-    const bookItem = document.createElement("article");
-    bookItem.append(titleElement, authorElement, yearElement);
+    const action = document.createElement("div");
+    action.classList.add("action")
 
     if (isCompleted) {
-
+        action.append(createButton("green", "Belum selesai di Baca"));
     } else {
-
+        action.append(createButton("green", "Selesai dibaca"));
     }
+
+    const bookItem = document.createElement("article");
+    bookItem.classList.add("book_item");
+    bookItem.append(titleElement, authorElement, yearElement, action);
 
     return bookItem;
 }
+
+function createButton(buttonClass, buttonText) {
+    const button = document.createElement("button");
+    button.classList.add(buttonClass)
+    button.innerText = buttonText;
+    return button;
+}
+
